@@ -1,0 +1,50 @@
+....npm install tronweb
+....npm install trongrid
+
+code 1 //////////////
+
+const Web3 =require ("web3")
+const web3 = new Web3("http://localhost:8545")
+const address_from = "0x90234cABd66E35944Db99C21b694EBafB01fc55E";
+const address_to =   "0xaE490f822ebfBA963B9CC108e302162af7ed43E7";
+const private_key =  "cfb12c8431c6b2bb012ee0e33f68b368209ee8bf4091b8519f37aca9e83bd4ec"
+
+const transaction = async() =>{
+
+const value = web3.utils.toWei('9' , 'ether');
+
+const SignedTransaction = await web3.eth.accounts.signTransaction(
+{
+    to : address_to,
+    value : value,
+      gas : 2000000,
+    
+},private_key)
+web3.eth.sendSignedTransaction(SignedTransaction.rawTransaction).then(
+    (receipt)=>{
+        console.log(receipt)
+        console.log("transaction is processing: ", receipt.contractAddress)
+    })
+}
+
+transaction();
+///////////////////
+
+
+code 2 //////////////////
+const tronWeb = require ("tronweb")
+
+const HttpProvider = tronWeb.providers.HttpProvider;
+const fullNode = new HttpProvider("https://api.trongrid.io");
+const address_from = "THxWTgHfkCa9PUz9pxLFzvZmRNReZze7Pj";
+const address_to =   "TCE8c1nmLz8N5XpPUYp2TrpHr51L8NztQr";
+const private_key =  "c102ea7289f1ac52cb75d93d4f1408028c920e315ff273de0b3377918bb98354"
+const Transaction = async ()=>{
+const resp = await tronWeb.TransactionBuilder.transfer(address_to, 10).send();
+        console.log("transfer:", resp);
+        private_key}
+        Transaction().then(() => {console.log("ok");
+        }).catch((err) =>{console.log("error:", err);    
+        }
+        )
+/////////////////
